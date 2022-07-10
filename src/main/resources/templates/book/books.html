@@ -7,14 +7,10 @@
 <body>
 <div>Список книг</div>
 <div th:each="book: ${books}">
-    <div>
-        <b th:text="${book.id}"></b>
-        <span th:text="${book.name}"></span>
-        <b th:text="${book.yearOfBirth}"></b>
-    </div>
+    <a th:href="@{/books/{id}(id=${book.id})}"
+       th:text="${book.getId() + ', ' + book.getName() + ', ' + book.getYearOfBirth()}">
+    </a>
 </div>
-
-
 <a href="/books/add">Добавить новую книгу</a>
 <br>
 <a href="/people">Список читателей</a>

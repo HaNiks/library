@@ -1,30 +1,24 @@
 package com.example.library.controller;
 
-import com.example.library.service.BookService;
+import com.example.library.dao.BookDAO;
 import com.example.library.dao.BookRepo;
 import com.example.library.model.Book;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
 
-
-    private final BookService bookService;
-
     private final BookRepo bookRepo;
+    private final BookDAO bookDAO;
 
-    public BookController(BookService bookService, BookRepo bookRepo) {
-        this.bookService = bookService;
+
+    public BookController(BookRepo bookRepo, BookDAO bookDAO) {
         this.bookRepo = bookRepo;
+        this.bookDAO = bookDAO;
     }
 
     @GetMapping()
@@ -34,21 +28,34 @@ public class BookController {
     }
 
     @GetMapping("/add")
-    public String showFormAddPage() {
+    public String showAddPage() {
         return "book/new";
     }
 
     @PostMapping("/add")
     public String addBook(@RequestParam(name = "name") String name, @RequestParam(name = "yearOfBirth") int yearOfBirth, Model model) {
-        bookService.saveBook(name, yearOfBirth, bookRepo);
+        bookRepo.save(new Book(name, yearOfBirth));
         model.addAttribute("books", bookRepo.findAll());
         return "redirect:/books";
     }
 
     @PostMapping("/deleteAll")
     public String deleteAll(Model model) {
-        bookService.deleteAll(bookRepo);
+        bookRepo.deleteAll();
         model.addAttribute("books", bookRepo.findAll());
+        return "redirect:/books";
+    }
+
+    @GetMapping("/{id}")
+    public String showEditPage(@PathVariable(name = "id") long id, Model model) {
+        model.addAttribute("books", bookRepo.findById(id).get());
+        return "book/show";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String edit(@PathVariable(name = "id") long id, Model model, @RequestParam(name = "name") String name,
+                       @RequestParam(name = "yearOfBirth") int yearOfBirth) {
+        model.addAttribute("books", bookDAO.update(bookRepo.findById(id).get(), name, yearOfBirth));
         return "redirect:/books";
     }
 }

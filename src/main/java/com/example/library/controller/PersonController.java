@@ -1,7 +1,7 @@
 package com.example.library.controller;
 
 import com.example.library.dao.PersonRepo;
-import com.example.library.service.PersonService;
+import com.example.library.model.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PersonController {
 
     private final PersonRepo personRepo;
-    private final PersonService personService;
 
-    public PersonController(PersonRepo personRepo, PersonService personService) {
+    public PersonController(PersonRepo personRepo) {
         this.personRepo = personRepo;
-        this.personService = personService;
     }
 
     @GetMapping()
@@ -28,20 +26,20 @@ public class PersonController {
     }
 
     @GetMapping("/add")
-    public String showFormNewPeople() {
+    public String showNewPeoplePage() {
         return "person/new";
     }
 
     @PostMapping("/add")
     public String addBook(@RequestParam(name = "name") String name, @RequestParam(name = "age") int age, Model model) {
-        personService.savePerson(name, age, personRepo);
+        personRepo.save(new Person(name, age));
         model.addAttribute("people", personRepo.findAll());
         return "redirect:/people";
     }
 
     @PostMapping("/deleteAll")
     public String deleteAll(Model model) {
-        personService.deleteAll(personRepo);
+        personRepo.deleteAll();
         model.addAttribute("people", personRepo.findAll());
         return "redirect:/people";
     }

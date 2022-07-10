@@ -1,6 +1,5 @@
 package com.example.library.model;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,9 +11,18 @@ public class Book {
 
     @Id
     @Column(name = "book_id")
-    private int id;
+    private long id;
     @Column(name = "name")
     private String name;
     @Column(name = "year_of_birth")
     private int yearOfBirth;
+
+    public Book(String name, int yearOfBirth) {
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public Book() {
+
+    }
 }

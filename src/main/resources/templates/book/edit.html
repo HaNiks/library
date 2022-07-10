@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit book</title>
+</head>
+<body>
+<!--    <div th:each="book: ${books}">-->
+<!--        <a th:href="@{/books/{id}(id=${book.id})}"-->
+<!--           th:text="${book.getId() + ', ' + book.getName() + ', ' + book.getYearOfBirth()}">-->
+<!--        </a>-->
+<!--    </div>-->
+
+    <form th:method="post" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+        <label for="name">Enter name</label>
+        <input type="text" th:field="*{name}" id="name"/>
+
+        <label for="yearOfBirth">Enter age</label>
+        <input type="text" th:field="*{age}" id="yearOfBirth"/>
+
+
+        <input type="submit" value="Update"/>
+    </form>
+</body>
+</html>
