@@ -14,15 +14,9 @@
     </div>
 </div>
 
-<form method="post" th:action="@{books/add}">
-    <label>
-        <input type="text" name="name" placeholder="Enter name to new book">
-        <input type="text" name="yearOfBirth" placeholder="Enter year of birth to new book">
-    </label>
-    <button type="submit">OK</button>
-</form>
 
-
+<a href="/books/add">Добавить новую книгу</a>
+<br>
 <a href="/people">Список читателей</a>
 
 <form method="post" th:action="@{books/deleteAll}">

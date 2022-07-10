@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new person</title>
+</head>
+<body>
+<form method="post" th:action="@{add}">
+    <label>
+        <p>Введите имя: <input type="text" name="name"></p>
+        <p>Введите возраст: <input type="text" name="age"></p>
+    </label>
+    <button type="submit">OK</button>
+</form>
+</body>
+</html>

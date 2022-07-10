@@ -27,6 +27,11 @@ public class PersonController {
         return "person/people";
     }
 
+    @GetMapping("/add")
+    public String showFormNewPeople() {
+        return "person/new";
+    }
+
     @PostMapping("/add")
     public String addBook(@RequestParam(name = "name") String name, @RequestParam(name = "age") int age, Model model) {
         personService.savePerson(name, age, personRepo);

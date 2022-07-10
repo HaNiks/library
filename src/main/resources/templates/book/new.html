@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new book</title>
+</head>
+<body>
+<form method="post" th:action="@{add}">
+  <label>
+    <p>Введите название книги: <input type="text" name="name"></p>
+    <p>Введите год выпуска книги: <input type="text" name="yearOfBirth"></p>
+  </label>
+  <button type="submit">OK</button>
+</form>
+</body>
+</html>

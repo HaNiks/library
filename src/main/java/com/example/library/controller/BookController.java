@@ -21,7 +21,6 @@ public class BookController {
     private final BookService bookService;
 
     private final BookRepo bookRepo;
-    private List<Book> books;
 
     public BookController(BookService bookService, BookRepo bookRepo) {
         this.bookService = bookService;
@@ -32,6 +31,11 @@ public class BookController {
     public String getAllBooks(Model model) {
         model.addAttribute("books", bookRepo.findAll());
         return "book/books";
+    }
+
+    @GetMapping("/add")
+    public String showFormAddPage() {
+        return "book/new";
     }
 
     @PostMapping("/add")
