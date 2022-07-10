@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список Книг</title>
+</head>
+<body>
+<div>Список книг</div>
+<div th:each="book: ${books}">
+    <div>
+        <b th:text="${book.id}"></b>
+        <span th:text="${book.name}"></span>
+        <b th:text="${book.yearOfBirth}"></b>
+    </div>
+</div>
+<form method="post" th:action="@{books/add}">
+    <label>
+        <input type="text" name="name" placeholder="Enter name to new book">
+        <input type="text" name="yearOfBirth" placeholder="Enter year of birth to new book">
+    </label>
+    <button type="submit">OK</button>
+</form>
+<a href="/people">Список читателей</a>
+<form method="post" th:action="@{books/deleteAll}">
+    <button type="submit">Delete All</button>
+</form>
+</body>
+</html>

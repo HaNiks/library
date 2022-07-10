@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список читателей</title>
+</head>
+<body>
+<div>Список читателей</div>
+<div th:each="person: ${allPerson}">
+    <div>
+        <b th:text="${person.id}"></b>
+        <span th:text="${person.name}"></span>
+        <b th:text="${person.age}"></b>
+    </div>
+</div>
+<a href="/books">Список книг</a>
+</body>
+</html>
