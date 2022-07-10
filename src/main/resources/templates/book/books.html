@@ -13,6 +13,7 @@
         <b th:text="${book.yearOfBirth}"></b>
     </div>
 </div>
+
 <form method="post" th:action="@{books/add}">
     <label>
         <input type="text" name="name" placeholder="Enter name to new book">
@@ -20,7 +21,10 @@
     </label>
     <button type="submit">OK</button>
 </form>
+
+
 <a href="/people">Список читателей</a>
+
 <form method="post" th:action="@{books/deleteAll}">
     <button type="submit">Delete All</button>
 </form>

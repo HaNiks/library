@@ -1,6 +1,6 @@
 package com.example.library.controller;
 
-import com.example.library.dao.BookService;
+import com.example.library.service.BookService;
 import com.example.library.dao.BookRepo;
 import com.example.library.model.Book;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,9 +44,7 @@ public class BookController {
     @PostMapping("/deleteAll")
     public String deleteAll(Model model) {
         bookService.deleteAll(bookRepo);
-        model.addAttribute(bookRepo.findAll());
+        model.addAttribute("books", bookRepo.findAll());
         return "redirect:/books";
     }
-
-
 }

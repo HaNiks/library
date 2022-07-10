@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список читателей</title>
+</head>
+<body>
+<div>Список читателей</div>
+<div th:each="person: ${people}">
+    <div>
+        <b th:text="${person.id}"></b>
+        <span th:text="${person.name}"></span>
+        <b th:text="${person.age}"></b>
+    </div>
+</div>
+
+<form method="post" th:action="@{people/add}">
+    <label>
+        <input type="text" name="name" placeholder="Enter name person">
+        <input type="text" name="age" placeholder="Enter age person">
+    </label>
+    <button type="submit">OK</button>
+</form>
+
+
+<a href="/books">Список книг</a>
+
+<form method="post" th:action="@{people/deleteAll}">
+    <button type="submit">Delete All</button>
+</form>
+
+</body>
+</html>

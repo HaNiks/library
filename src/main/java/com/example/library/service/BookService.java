@@ -1,5 +1,6 @@
-package com.example.library.dao;
+package com.example.library.service;
 
+import com.example.library.dao.BookRepo;
 import com.example.library.model.Book;
 import org.springframework.stereotype.Service;
 
