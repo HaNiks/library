@@ -1,6 +1,5 @@
 package com.example.library.controller;
 
-import com.example.library.dao.BookDAO;
 import com.example.library.dao.BookRepo;
 import com.example.library.model.Book;
 import org.springframework.stereotype.Controller;
@@ -13,12 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     private final BookRepo bookRepo;
-    private final BookDAO bookDAO;
 
 
-    public BookController(BookRepo bookRepo, BookDAO bookDAO) {
+    public BookController(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
-        this.bookDAO = bookDAO;
     }
 
     @GetMapping()
@@ -47,15 +44,24 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String showEditPage(@PathVariable(name = "id") long id, Model model) {
+    public String showIdPage(@PathVariable(name = "id") long id, Model model) {
         model.addAttribute("books", bookRepo.findById(id).get());
         return "book/show";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String showEditPage(@PathVariable(name = "id") long id, Model model) {
+        model.addAttribute("book", bookRepo.findById(id).get());
+        return "book/edit";
     }
 
     @PostMapping("/{id}/edit")
     public String edit(@PathVariable(name = "id") long id, Model model, @RequestParam(name = "name") String name,
                        @RequestParam(name = "yearOfBirth") int yearOfBirth) {
-        model.addAttribute("books", bookDAO.update(bookRepo.findById(id).get(), name, yearOfBirth));
+        Book book = bookRepo.findById(id).get();
+        book.setName(name);
+        book.setYearOfBirth(yearOfBirth);
+        model.addAttribute("book", bookRepo.save(book));
         return "redirect:/books";
     }
 }

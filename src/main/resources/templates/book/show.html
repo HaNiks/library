@@ -9,8 +9,9 @@
     <p th:text="${book.getId()}">Name</p>
     <p th:text="${book.getName()}">Name</p>
     <p th:text="${book.getYearOfBirth()}">Name</p>
-
-    <a href="/people/${id}/edit">Список читателей</a>
+    <form th:method="get" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+        <input type="submit" value="Редактировать">
+    </form>
 </div>
 </body>
 </html>
