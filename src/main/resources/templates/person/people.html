@@ -7,11 +7,9 @@
 <body>
 <div>Список читателей</div>
 <div th:each="person: ${people}">
-    <div>
-        <b th:text="${person.id}"></b>
-        <span th:text="${person.name}"></span>
-        <b th:text="${person.age}"></b>
-    </div>
+    <a th:href="@{/people/{id}(id=${person.id})}"
+       th:text="${person.getId() + ', ' + person.getName() + ', ' + person.getAge()}">
+    </a>
 </div>
 
 <a href="/people/add">Добавить нового пользователя</a>
@@ -19,7 +17,7 @@
 <a href="/books">Список книг</a>
 
 <form method="post" th:action="@{people/deleteAll}">
-    <button type="submit">Delete All</button>
+    <button type="submit">Удалить всех</button>
 </form>
 
 </body>

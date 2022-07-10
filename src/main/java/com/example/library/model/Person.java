@@ -11,7 +11,7 @@ public class Person {
 
     @Id
     @Column(name = "person_id")
-    private int id;
+    private long id;
     @Column(name = "name")
     private String name;
     @Column(name = "age")
